@@ -10,6 +10,16 @@ jobs:
   build-test:
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: devopsstudents
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -29,7 +39,7 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Build and test with Maven
-        run: mvn clean verify -B -Dspring.profiles.active=test
+        run: mvn clean verify -B
 
       - name: Build Docker image (Backend)
         run: docker build -t myrepo/sms-app:${{ github.sha }} .
