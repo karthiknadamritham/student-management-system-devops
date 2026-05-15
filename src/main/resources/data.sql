@@ -149,3 +149,17 @@ INSERT INTO students (full_name, email, dob, gender, department, semester, enrol
 ('Student 148', 'student148@example.com', '2007-05-20', 'M', 'Computer Science', 4, '2024-05-15', '1234567890', true),
 ('Student 149', 'student149@example.com', '2004-05-20', 'F', 'Mechanical Engineering', 5, '2024-05-15', '1234567890', true),
 ('Student 150', 'student150@example.com', '2007-05-20', 'M', 'Information Technology', 6, '2023-05-16', '1234567890', true);
+ - -   S a m p l e   C o u r s e s 
+ I N S E R T   I N T O   c o u r s e s   ( c o u r s e _ c o d e ,   c o u r s e _ n a m e ,   c r e d i t s ,   f a c u l t y _ n a m e ,   d e p a r t m e n t ,   s e m e s t e r ,   s y l l a b u s _ r e f e r e n c e )   V A L U E S   ( ' C S 1 0 1 ' ,   ' I n t r o d u c t i o n   t o   P r o g r a m m i n g ' ,   4 ,   ' D r .   S m i t h ' ,   ' C o m p u t e r   S c i e n c e ' ,   1 ,   ' h t t p : / / s y l l a b u s . e d u / c s 1 0 1 ' ) ; 
+ I N S E R T   I N T O   c o u r s e s   ( c o u r s e _ c o d e ,   c o u r s e _ n a m e ,   c r e d i t s ,   f a c u l t y _ n a m e ,   d e p a r t m e n t ,   s e m e s t e r ,   s y l l a b u s _ r e f e r e n c e )   V A L U E S   ( ' C S 1 0 2 ' ,   ' D a t a   S t r u c t u r e s ' ,   4 ,   ' D r .   J o n e s ' ,   ' C o m p u t e r   S c i e n c e ' ,   2 ,   ' h t t p : / / s y l l a b u s . e d u / c s 1 0 2 ' ) ; 
+ I N S E R T   I N T O   c o u r s e s   ( c o u r s e _ c o d e ,   c o u r s e _ n a m e ,   c r e d i t s ,   f a c u l t y _ n a m e ,   d e p a r t m e n t ,   s e m e s t e r ,   s y l l a b u s _ r e f e r e n c e )   V A L U E S   ( ' E E 1 0 1 ' ,   ' B a s i c   E l e c t r o n i c s ' ,   3 ,   ' D r .   B r o w n ' ,   ' E l e c t r o n i c s ' ,   1 ,   ' h t t p : / / s y l l a b u s . e d u / e e 1 0 1 ' ) ; 
+ 
+ - -   S a m p l e   A t t e n d a n c e 
+ I N S E R T   I N T O   a t t e n d a n c e   ( s t u d e n t _ i d ,   c o u r s e _ i d ,   d a t e ,   s t a t u s )   V A L U E S   ( 1 ,   1 ,   ' 2 0 2 6 - 0 5 - 1 0 ' ,   ' P r e s e n t ' ) ; 
+ I N S E R T   I N T O   a t t e n d a n c e   ( s t u d e n t _ i d ,   c o u r s e _ i d ,   d a t e ,   s t a t u s )   V A L U E S   ( 1 ,   1 ,   ' 2 0 2 6 - 0 5 - 1 1 ' ,   ' A b s e n t ' ) ; 
+ I N S E R T   I N T O   a t t e n d a n c e   ( s t u d e n t _ i d ,   c o u r s e _ i d ,   d a t e ,   s t a t u s )   V A L U E S   ( 2 ,   1 ,   ' 2 0 2 6 - 0 5 - 1 0 ' ,   ' P r e s e n t ' ) ; 
+ 
+ - -   S a m p l e   M a r k s 
+ I N S E R T   I N T O   m a r k s   ( s t u d e n t _ i d ,   c o u r s e _ i d ,   i n t e r n a l _ m a r k s ,   m i d _ t e r m _ m a r k s ,   e n d _ t e r m _ m a r k s ,   f i n a l _ g r a d e )   V A L U E S   ( 1 ,   1 ,   1 8 ,   2 5 ,   4 5 ,   ' A ' ) ; 
+ I N S E R T   I N T O   m a r k s   ( s t u d e n t _ i d ,   c o u r s e _ i d ,   i n t e r n a l _ m a r k s ,   m i d _ t e r m _ m a r k s ,   e n d _ t e r m _ m a r k s ,   f i n a l _ g r a d e )   V A L U E S   ( 2 ,   1 ,   1 5 ,   2 0 ,   3 5 ,   ' B ' ) ;  
+ 

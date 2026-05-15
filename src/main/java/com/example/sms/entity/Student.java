@@ -35,6 +35,9 @@ public class Student {
     @Column(length = 15)
     private String phone;
 
+    @Column(length = 255)
+    private String address;
+
     @Column(columnDefinition = "boolean default true")
     private Boolean isActive = true;
 
@@ -57,6 +60,8 @@ public class Student {
     public void setEnrollmentDate(LocalDate enrollmentDate) { this.enrollmentDate = enrollmentDate; }
     public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
     public Boolean getIsActive() { return isActive; }
     public void setIsActive(Boolean isActive) { this.isActive = isActive; }
 }
