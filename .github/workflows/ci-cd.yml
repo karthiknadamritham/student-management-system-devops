@@ -38,6 +38,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: Wait for MySQL to be ready
+        run: |
+          until nc -z -v -w30 localhost 3306; do
+            echo "Waiting for MySQL..."
+            sleep 5
+          done
+          echo "MySQL is up and running!"
+
       - name: Build and test with Maven
         run: mvn clean verify -B
 
