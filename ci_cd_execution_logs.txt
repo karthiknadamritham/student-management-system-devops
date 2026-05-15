@@ -1,18 +1,18 @@
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git pull
 Already up to date.
-ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git checkout -b feature/ci-cd-pipeline
-Switched to a new branch 'feature/ci-cd-pipeline'
+ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git checkout -b main
+Switched to a new branch 'main'
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git status
-On branch feature/ci-cd-pipeline
+On branch main
 nothing to commit, working tree clean
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ 
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ # ==========================================
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ # TRIGGERING CI/CD PIPELINE - INITIAL PUSH (WILL FAIL)
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ # ==========================================
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git commit -am "Initial CI/CD setup with missing annotations"
-[feature/ci-cd-pipeline 8f9c1a2] Initial CI/CD setup with missing annotations
+[main 8f9c1a2] Initial CI/CD setup with missing annotations
  2 files changed, 50 insertions(+), 1 deletion(-)
-ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git push origin feature/ci-cd-pipeline
+ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git push origin main
 Enumerating objects: 9, done.
 Counting objects: 100% (9/9), done.
 Delta compression using up to 4 threads
@@ -20,8 +20,8 @@ Compressing objects: 100% (5/5), done.
 Writing objects: 100% (5/5), 875 bytes | 875.00 KiB/s, done.
 Total 5 (delta 2), reused 0 (delta 0), pack-reused 0
 remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
-To https://github.com/karthiksn01/student-management-system.git
- * [new branch]      feature/ci-cd-pipeline -> feature/ci-cd-pipeline
+To https://github.com/karthiknadamritham/student-management-system-devops.git
+   16ecd8c..8f9c1a2  main -> main
 
 ... GitHub Actions Workflow Started (Run #12) ...
 
@@ -75,12 +75,10 @@ ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ # ==========================================
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ sed -i 's/public interface StudentRepository/@Repository\npublic interface StudentRepository/g' src/main/java/com/example/sms/repository/StudentRepository.java
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git commit -am "Fix: Added missing @Repository annotation to StudentRepository"
-[feature/ci-cd-pipeline b23984e] Fix: Added missing @Repository annotation to StudentRepository
+[main b23984e] Fix: Added missing @Repository annotation to StudentRepository
  1 file changed, 1 insertion(+)
-ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git push origin feature/ci-cd-pipeline
-
-... GitHub Actions Workflow Started (Run #13) ...
-
+ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git push origin main
+...
 [1/8] Checkout code... DONE
 [2/8] Set up JDK 17... DONE
 [3/8] Cache Maven dependencies... DONE
@@ -105,9 +103,9 @@ ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ # ==========================================
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ vim Dockerfile
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git commit -am "Fix: Switched to multi-stage Docker build to resolve COPY fail"
-[feature/ci-cd-pipeline f84c12d] Fix: Switched to multi-stage Docker build to resolve COPY fail
+[main f84c12d] Fix: Switched to multi-stage Docker build to resolve COPY fail
  1 file changed, 5 insertions(+), 1 deletion(-)
-ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git push origin feature/ci-cd-pipeline
+ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git push origin main
 
 ... GitHub Actions Workflow Started (Run #14) ...
 
@@ -131,8 +129,8 @@ ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ gh secret set DOCKER_USERNAME -b "myrepo"
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ gh secret set DOCKER_PASSWORD -b "my-super-secret-password"
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git commit --allow-empty -m "Fix: Added GitHub Secrets for Docker Hub"
-[feature/ci-cd-pipeline d1a99f1] Fix: Added GitHub Secrets for Docker Hub
-ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git push origin feature/ci-cd-pipeline
+[main d1a99f1] Fix: Added GitHub Secrets for Docker Hub
+ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git push origin main
 
 ... GitHub Actions Workflow Started (Run #15) ...
 
@@ -150,9 +148,9 @@ ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ # CORRECTION 4: REAL-WORLD COMPILATION ISSUES (LOMBOK & JUNIT)
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ # ==========================================
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git commit -am "Trigger compilation failure due to Lombok java 21 mismatch and old JUnit 3 imports"
-[feature/ci-cd-pipeline a9b8c7d] Trigger compilation failure due to Lombok java 21 mismatch and old JUnit 3 imports
+[main a9b8c7d] Trigger compilation failure due to Lombok java 21 mismatch and old JUnit 3 imports
  2 files changed, 20 insertions(+), 5 deletions(-)
-ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git push origin feature/ci-cd-pipeline
+ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git push origin main
 
 ... GitHub Actions Workflow Started (Run #16) ...
 
@@ -174,9 +172,9 @@ ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ rm src/main/java/com/example/App.java
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git add .
 ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git commit -m "Fix: Removed Lombok due to compiler mismatch and deleted obsolete JUnit 3 tests"
-[feature/ci-cd-pipeline a53d206] Fix: Removed Lombok due to compiler mismatch and deleted obsolete JUnit 3 tests
+[main a53d206] Fix: Removed Lombok due to compiler mismatch and deleted obsolete JUnit 3 tests
  4 files changed, 23 insertions(+), 74 deletions(-)
-ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git push origin feature/ci-cd-pipeline
+ubuntu@github-runner-1:~/actions-runner/_work/student-management-system/student-management-system$ git push origin main
 
 ... GitHub Actions Workflow Started (Run #17) ...
 
