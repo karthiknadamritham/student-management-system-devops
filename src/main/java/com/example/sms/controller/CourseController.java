@@ -24,4 +24,9 @@ public class CourseController {
     public Course createCourse(@RequestBody Course course) {
         return courseRepository.save(course);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteCourse(@PathVariable Long id) {
+        courseRepository.deleteById(id);
+    }
 }

@@ -50,6 +50,56 @@ function App() {
     s.studentId.toString().includes(searchTerm)
   );
 
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this student?')) {
+      try {
+        await axios.delete(`${API_BASE_URL}/students/${id}`);
+        setStudents(students.filter(s => s.studentId !== id));
+      } catch (err) {
+        alert('Failed to delete student.');
+      }
+    }
+  };
+
+  const handleAddStudent = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const newStudent = Object.fromEntries(formData.entries());
+    try {
+      const res = await axios.post(`${API_BASE_URL}/students`, newStudent);
+      setStudents([...students, res.data]);
+      e.target.reset();
+      alert('Student added successfully!');
+    } catch (err) {
+      alert('Failed to add student. Check if email is unique.');
+    }
+  };
+
+  const handleDeleteCourse = async (id) => {
+    if (window.confirm('Are you sure you want to delete this course?')) {
+      try {
+        await axios.delete(`${API_BASE_URL}/courses/${id}`);
+        setCourses(courses.filter(c => c.id !== id));
+      } catch (err) {
+        alert('Failed to delete course.');
+      }
+    }
+  };
+
+  const handleAddCourse = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const newCourse = Object.fromEntries(formData.entries());
+    try {
+      const res = await axios.post(`${API_BASE_URL}/courses`, newCourse);
+      setCourses([...courses, res.data]);
+      e.target.reset();
+      alert('Course added successfully!');
+    } catch (err) {
+      alert('Failed to add course.');
+    }
+  };
+
   const renderContent = () => {
     if (loading) return <div className="loading-state"><div className="loader"></div><p>Loading {activeTab}...</p></div>;
     if (error) return <div className="error-state"><h3>⚠️ Error</h3><p>{error}</p></div>;
@@ -86,6 +136,34 @@ function App() {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
+
+            <div className="glass-card add-form-card">
+              <h3>➕ Add New Student</h3>
+              <form onSubmit={handleAddStudent} className="add-form">
+                <div className="form-group">
+                  <label>Full Name</label>
+                  <input name="fullName" placeholder="e.g. John Doe" required />
+                </div>
+                <div className="form-group">
+                  <label>Email Address</label>
+                  <input name="email" type="email" placeholder="john@example.com" required />
+                </div>
+                <div className="form-group">
+                  <label>Department</label>
+                  <input name="department" placeholder="e.g. CS" required />
+                </div>
+                <div className="form-group">
+                  <label>Semester</label>
+                  <input name="semester" type="number" placeholder="1-8" required />
+                </div>
+                <div className="form-group">
+                  <label>Date of Birth</label>
+                  <input name="dob" type="date" required />
+                </div>
+                <button type="submit" className="btn-add">Add Student</button>
+              </form>
+            </div>
+
             <div className="table-glass">
               <div className="table-inner">
                 <table>
@@ -95,7 +173,7 @@ function App() {
                       <th>Full Name</th>
                       <th>Department</th>
                       <th>Semester</th>
-                      <th>Status</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -106,9 +184,9 @@ function App() {
                         <td><span className="dept-pill">{student.department}</span></td>
                         <td>Sem {student.semester}</td>
                         <td>
-                          <span className={`status-pill ${student.isActive ? 'active' : 'inactive'}`}>
-                            {student.isActive ? 'Active' : 'Inactive'}
-                          </span>
+                          <button onClick={() => handleDelete(student.studentId)} className="btn-delete">
+                            🗑️ Delete
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -125,6 +203,37 @@ function App() {
             <div className="dashboard-controls">
               <h2>📚 Course Catalog <span className="badge">{courses.length}</span></h2>
             </div>
+
+            <div className="glass-card add-form-card">
+              <h3>➕ Add New Course</h3>
+              <form onSubmit={handleAddCourse} className="add-form">
+                <div className="form-group">
+                  <label>Course Code</label>
+                  <input name="courseCode" placeholder="e.g. CS103" required />
+                </div>
+                <div className="form-group">
+                  <label>Course Name</label>
+                  <input name="courseName" placeholder="e.g. Algorithms" required />
+                </div>
+                <div className="form-group">
+                  <label>Credits</label>
+                  <input name="credits" type="number" placeholder="1-4" required />
+                </div>
+                <div className="form-group">
+                  <label>Faculty</label>
+                  <input name="facultyName" placeholder="Dr. XYZ" required />
+                </div>
+                <div className="form-group">
+                  <label>Dept / Sem</label>
+                  <div style={{display:'flex', gap: '10px'}}>
+                    <input name="department" placeholder="Dept" required style={{flex:1}} />
+                    <input name="semester" type="number" placeholder="Sem" required style={{flex:1}} />
+                  </div>
+                </div>
+                <button type="submit" className="btn-add">Add Course</button>
+              </form>
+            </div>
+
             <div className="table-glass">
               <div className="table-inner">
                 <table>
@@ -134,7 +243,7 @@ function App() {
                       <th>Course Name</th>
                       <th>Credits</th>
                       <th>Faculty</th>
-                      <th>Semester</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -144,7 +253,11 @@ function App() {
                         <td className="td-name">{course.courseName}</td>
                         <td>{course.credits}</td>
                         <td>{course.facultyName}</td>
-                        <td>Sem {course.semester}</td>
+                        <td>
+                          <button onClick={() => handleDeleteCourse(course.id)} className="btn-delete">
+                            🗑️ Delete
+                          </button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
