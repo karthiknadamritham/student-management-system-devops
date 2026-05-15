@@ -1,0 +1,51 @@
+name: Student Management System CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Build and test with Maven
+        run: mvn clean verify -B
+
+      - name: Build Docker image (Backend)
+        run: docker build -t myrepo/sms-app:${{ github.sha }} .
+
+      - name: Build Docker image (Frontend)
+        run: docker build -t myrepo/sms-frontend:${{ github.sha }} ./frontend
+
+      # The Push and Deploy steps are mocked/commented since this is a local setup
+      # - name: Login to Docker Hub
+      #   run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+      #
+      # - name: Push Docker images
+      #   run: |
+      #     docker push myrepo/sms-app:${{ github.sha }}
+      #     docker push myrepo/sms-frontend:${{ github.sha }}
+      #
+      # - name: Deploy via SSH
+      #   run: |
+      #     ssh user@server "cd /app && docker-compose pull && docker-compose up -d"
